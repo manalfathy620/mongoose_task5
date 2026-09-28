@@ -62,12 +62,9 @@ router.patch("/users/:id", async (req, res, next) => {
       return res.status(400).send(`Not allowed to update ${invalidKey}`);
     }
       keys.forEach((key)=>user[key]=req.body[key])
-    // user.password = req.body.password
-    // user.age = req.body.age
-    // Object.assign(user, req.body);
-    //اليوزر هنا قبل التشفير
-    await user.save(); //هنا نادى فانكشن التشفير وبعدين سيف
-    console.log(user); //هنا اليوزر بعد التشفير
+
+    await user.save(); 
+    console.log(user); 
 
     res.status(200).send(user);
   } catch (error) {
