@@ -48,19 +48,19 @@ const userSchema = new mongoose.Schema({
 
 })
 
-//اعمل هاش للباس قبل save
+
 userSchema.pre("save",async function(){
   console.log("pre save")
   const user = this  //current document or current user
   if(user.isModified("password"))//true if password create or update
   user.password = await bcryptjs.hash(user.password , 8)
-// const compared = await bcryptjs.compare()
+
 })
 
 // compare وقت الـ Login
 userSchema.methods.comparePassword = async function (enteredPassword) {
-  return await bcryptjs.compare(enteredPassword,this.password)  //return true/false in 
-  //const isMatch = await user.comparePassword(password); in login
+  return await bcryptjs.compare(enteredPassword,this.password)  
+
 };
 
 const User= mongoose.model("user",userSchema)
